@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using System;
 
 namespace Aircompany.Planes
 {
-    public abstract class Plane : IComparable<Plane>
+    public abstract class Plane
     {
-        public string Model { get; private set; }
-        public int MaxSpeed { get; private set; }
-        public int MaxFlightDistance { get; private set; }
-        public int MaxLoadCapacity { get; private set; }
+        private readonly string Model;
+        private readonly int MaxSpeed;
+        private readonly int MaxFlightDistance;
+        private readonly int MaxLoadCapacity;
 
         public Plane(string model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity)
         {
@@ -18,9 +17,34 @@ namespace Aircompany.Planes
             MaxLoadCapacity = maxLoadCapacity;
         }
 
+        public string GetModel()
+        {
+            return Model;
+        }
+
+        public int GetMaxSpeed()
+        {
+            return MaxSpeed;
+        }
+
+        public int GetMaxFlightDistance()
+        {
+            return MaxFlightDistance;
+        }
+
+        public int GetMaxLoadCapacity()
+        {
+            return MaxLoadCapacity;
+        }
+
         public override string ToString()
         {
-            return $"Plane{{model='{Model}', maxSpeed={MaxSpeed}, maxFlightDistance={MaxFlightDistance}, maxLoadCapacity={MaxLoadCapacity}}}";
+            return "Plane{" +
+                "model='" + Model + '\'' +
+                ", maxSpeed=" + MaxSpeed +
+                ", maxFlightDistance=" + MaxFlightDistance +
+                ", maxLoadCapacity=" + MaxLoadCapacity +
+                '}';
         }
 
         public override bool Equals(object obj)
@@ -40,11 +64,6 @@ namespace Aircompany.Planes
             hashCode = hashCode * -1521134295 + MaxFlightDistance.GetHashCode();
             hashCode = hashCode * -1521134295 + MaxLoadCapacity.GetHashCode();
             return hashCode;
-        }
-
-        public int CompareTo(Plane OtherPlane)
-        {
-            return MaxLoadCapacity.CompareTo(OtherPlane.MaxLoadCapacity);
         }
 
     }
